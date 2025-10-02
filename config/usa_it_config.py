@@ -1,0 +1,5 @@
+DATA_PATH = r"data"
+ern_folder_path = DATA_PATH + r"\eps_it_usa"
+stock_price_path = DATA_PATH + r"\px_usa\Last_Price.xlsx"
+index_path = DATA_PATH + r"\index_usa\nasdaq_index.xlsx"
+security_list_path = DATA_PATH + r"\security_list.xlsx"
