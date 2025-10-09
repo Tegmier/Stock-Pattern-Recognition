@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import shutup
 from tqdm import tqdm
 from utils.data_process_toolkit import month_to_quarter
+from API.api import get_stock_price_data_boolmberg_start_end_period
 
 shutup.please()
 # parameters
@@ -14,12 +15,24 @@ influence_period = 20 # trading days
 lower_date_boundry = "2015-01-01" 
 upper_date_boundry = "2024-10-01"
 output_ols_report = True
+num_total_quarter = 8
+price_prev_window = 20
+price_after_window = 20
+random_seed = 42
+num_of_parts = 3
+
+
 
 PE_check_flag = False
-num_total_quarter = 8
+Raw_data_process = True
+bbg_data_collect = True
+
+
 
 path = "data/ern"
 sector_df_path = "data/spx_sector.csv"
+total_equity_df_prefix = "data/total_equity_df"
+bbg_data_collect_path = "data/bbg_data_collect"
 
 ########################################### Run PE Check ###########################################
 
@@ -34,64 +47,89 @@ if PE_check_flag:
             print(f"{file} check passed")
 
 ########################################### Raw Data Process ###########################################
-total_equity_df_list = []
-sector_df = pd.read_csv(sector_df_path)
-sector_dic = dict(zip(sector_df["Ticker"], sector_df["Sector-Code"]))
-for equity in tqdm(os.listdir(path), desc="Raw Data Processing"):  
-    columns = []
-    equity_name = equity[:-5]
-    data = pd.read_excel(os.path.join(path, equity), 
-                         engine="openpyxl")
+if Raw_data_process:
+    total_equity_df_list = []
+    sector_df = pd.read_csv(sector_df_path)
+    sector_dic = dict(zip(sector_df["Ticker"], sector_df["Sector-Code"]))
+    for equity in tqdm(os.listdir(path), desc="Raw Data Processing"):  
+        columns = []
+        equity_name = equity[:-5]
+        data = pd.read_excel(os.path.join(path, equity), 
+                            engine="openpyxl")
+        data["Equity name"] = equity_name
+        data["Ann Date"] = pd.to_datetime(data["Ann Date"], errors='coerce')
+        data["Prev Ann Date"] = data["Ann Date"].shift(-1)
 
-    data["Ann Date"] = pd.to_datetime(data["Ann Date"], errors='coerce')
+        data["EPS"] = data["Comp"]
+        try:
+            data["Surprise"] = data["%Surp"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
+        except Exception:
+            print(f"{equity_name} encountered a problem while transforming Surprise")
+            sys.exit(1)
 
-    data["EPS"] = data["Comp"]
-    try:
-        data["Surprise"] = data["%Surp"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
-    except Exception:
-        print(f"{equity_name} encountered a problem while transforming Surprise")
-        sys.exit(1)
+        for i in range(len(data)):
+            pe = data.loc[i, "P/E"]
+            if type(pe) is str:
+                if 'k' in pe:
+                    data.loc[i, "P/E"] = float(pe.strip("k")) * 1000
+                elif pe == '':
+                    pass
+                else:
+                    tqdm.write(f"{equity_name} has wrong value in PE")
+                    sys.exit(1)
+        data["PE"] = data["P/E"]
+        data["PE Change"] = data["PE"].pct_change(periods=-1)
 
-    for i in range(len(data)):
-        pe = data.loc[i, "P/E"]
-        if type(pe) is str:
-            if 'k' in pe:
-                data.loc[i, "P/E"] = float(pe.strip("k")) * 1000
-            elif pe == '':
-                pass
-            else:
-                tqdm.write(f"{equity_name} has wrong value in PE")
-                sys.exit(1)
-    data["PE"] = data["P/E"]
-    data["PE Change"] = data["PE"].pct_change(periods=-1)
+        data["%Px Chg"] = data["%Px Chg"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
+        # Up: 1, Down: 0
+        data["Up Down Flag"] = data["%Px Chg"].apply(lambda x: 1 if x > 0 else 0)
+        # Beat: 1, Miss: 0
+        data["Beat Miss Flag"] = data["Surprise"].apply(lambda x: 1 if x>0 else 0)
 
-    data["%Px Chg"] = data["%Px Chg"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
-    # Up: 1, Down: 0
-    data["Up Down Flag"] = data["%Px Chg"].apply(lambda x: 1 if x > 0 else 0)
-    # Beat: 1, Miss: 0
-    data["Beat Miss Flag"] = data["Surprise"].apply(lambda x: 1 if x>0 else 0)
+        try:
+            data["Sector"] = sector_dic[equity_name]
+        except KeyError as e:
+            print(f"{equity_name} has no sector code")
+            sys.exit(1)
 
-    try:
-        data["Sector"] = sector_dic[equity_name]
-    except KeyError as e:
-        print(f"{equity_name} has no sector code")
-        sys.exit(1)
+        data["Quarter"] = data["Per End"].apply(month_to_quarter)
 
-    data["Quarter"] = data["Per End"].apply(month_to_quarter)
+        columns.extend(["Equity name", "Ann Date", "Prev Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag", "Sector", "Quarter"])
+        for i in range(num_total_quarter):
+            col = f"Surprise {8-i}"
+            data[col] = data["Ann Date"].shift(8-i)
+            columns.append(col)
+        
+        equity_df = data[columns]
+        equity_df.dropna(how="any", inplace=True)
+        if not equity_df.empty:
+            total_equity_df_list.append(equity_df)
 
-    columns.extend(["Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag", "Sector", "Quarter"])
-    for i in range(num_total_quarter):
-        col = f"Surprise {8-i}"
-        data[col] = data["Ann Date"].shift(8-i)
-        columns.append(col)
+    total_equity_df = pd.concat(total_equity_df_list).reset_index(drop=True)
+    total_equity_df = total_equity_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    parts = np.array_split(total_equity_df, num_of_parts)
+    for i, part in enumerate(parts):
+        part.to_csv(f"{total_equity_df_prefix}_part_{i}.csv", index=False)
+
+
+
+########################################### Price and other data collection from BBG ###########################################
+
+#### 把data/total_equity_df下的文件移动到bbg_data_collect中，然后进行处理
+if bbg_data_collect:
+    for file in os.listdir(bbg_data_collect_path):
+        total_equity_df= pd.read_csv(file)
+        for idx, row in total_equity_df.iterrows():
+            full_price_seq = get_stock_price_data_boolmberg_start_end_period(row["Equity name"], row["prev"])
+            
     
-    equity_df = data[columns]
-    equity_df.dropna(how="any", inplace=True)
-    if not equity_df.empty:
-        total_equity_df_list.append(equity_df)
+    
+    
 
-total_equity_df = pd.concat(total_equity_df_list).reset_index(drop=True)
-total_equity_df.to_csv("data/total_equity_df.csv")
+
+
+
+
 
 
 

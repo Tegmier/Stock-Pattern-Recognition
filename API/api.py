@@ -21,7 +21,7 @@ def get_stock_price_data_boolmberg_start_period(ticker, start_date, number_of_tr
     df.columns = ["Date", "Price"]
     return df.iloc[:number_of_trading_days]
 
-def get_stock_price_data_boolmberg_start_end_period(ticker, start_date, end_date, number_of_trading_days):
+def get_stock_price_data_boolmberg_start_end_period(ticker, start_date, end_date):
     # start_date is a date type time value
     # 获取的数据是从以前到现在排列的
     # 返回dataframe类型的数据
@@ -32,7 +32,7 @@ def get_stock_price_data_boolmberg_start_end_period(ticker, start_date, end_date
     end_date=end_date)
     df = df.reset_index()
     df.columns = ["Date", "Price"]
-    return df.iloc[:number_of_trading_days+1]
+    return df
 
 def get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date):
     # start_date is a date type time value
@@ -71,10 +71,10 @@ def get_one_day_indicator_data(ticker, current_date):
 
 
 
-# # test
-# ticker = "NVDA US Equity"
-# start_date = datetime.date(2014,1,1)
-# end_date = datetime.date(2014,1,31)
+# test
+ticker = "NVDA US Equity"
+start_date = datetime.date(2025,10,1)
+end_date = datetime.date(2025,11,31)
 # earnings_date = datetime.date(2025,8,27)
-# # print(get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date))
+print(get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date))
 # print(get_one_day_indicator_data(ticker, earnings_date))
