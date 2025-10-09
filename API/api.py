@@ -2,6 +2,7 @@ import yfinance as yf
 import pandas as pd
 from xbbg import blp
 import datetime
+import numpy as np
 
 def get_stock_data_yf(ticker, start_date, trading_days):
     stock = yf.Ticker(ticker)
@@ -66,6 +67,16 @@ def get_one_day_indicator_data(ticker, current_date):
         indicator_dic["PE Ratio"] = df["PE Ratio"][0]
         indicator_dic["PB Ratio"] = df["PB Ratio"][0]
     return indicator_dic
+
+def get_marketcap(ticker, current_date):
+    df = blp.bdh(
+        [ticker],
+        ["CUR_MKT_CAP"],
+        start_date=current_date,
+        end_date=current_date)
+    df = df.reset_index()
+    df.columns= ["Date", "Market Cap"]
+    return df["Market Cap"][0]
 
 
 

@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import shutup
 from tqdm import tqdm
 from utils.data_process_toolkit import month_to_quarter
-from API.api import get_stock_price_data_boolmberg_start_end_period
+from utils.data_preparation_toolkit import situatuion_judgement
+from API.api import get_stock_price_data_boolmberg_start_end_period, get_marketcap
 
 shutup.please()
 # parameters
@@ -26,6 +27,7 @@ num_of_parts = 3
 PE_check_flag = False
 Raw_data_process = True
 bbg_data_collect = False
+final_dataset_construction = True
 
 
 
@@ -33,6 +35,7 @@ path = "data/ern"
 sector_df_path = "data/spx_sector.csv"
 total_equity_df_prefix = "data/total_equity_df"
 bbg_data_collect_path = "data/bbg_data_collect"
+final_dataset_path = "data/final_dataset"
 
 ########################################### Run PE Check ###########################################
 
@@ -124,9 +127,64 @@ if Raw_data_process:
 #### 把data/total_equity_df下的文件移动到bbg_data_collect中，然后进行处理
 if bbg_data_collect:
     for file in os.listdir(bbg_data_collect_path):
-        total_equity_df= pd.read_csv(file)
+        total_equity_df= pd.read_csv(os.path.join(bbg_data_collect, file))
         for idx, row in total_equity_df.iterrows():
-            full_price_seq = get_stock_price_data_boolmberg_start_end_period(row["Equity name"], row["Prev Ann Date"], row["Next Ann Date"])
+            equity_name = row["Equity name"]
+            ann_date = row["Ann Date"]
+            prev_ann_date = row["Prev Ann Date"]
+            next_ann_date = row["Next Ann Date"]
+            try:
+                full_price_seq = get_stock_price_data_boolmberg_start_end_period(equity_name, prev_ann_date, next_ann_date)
+                market_cap = get_marketcap(equity_name, ann_date)
+                total_equity_df.iloc[idx, "Data Availability"] = True
+                total_equity_df.iloc[idx, "total price seq"] = full_price_seq
+                total_equity_df.iloc[idx, "market cap"] = market_cap
+            except Exception:
+                full_price_seq = pd.DataFrame()
+                market_cap = None
+                total_equity_df.iloc[idx, "Data Availability"] = False
+                total_equity_df.iloc[idx, "total price seq"] = full_price_seq
+                total_equity_df.iloc[idx, "market cap"] = market_cap
+                print(f"{row["Equity name"]}, {ann_date} has no price sequence or market cap")
+        total_equity_df.to_csv(os.path.join(final_dataset_path, file)) 
+                
+
+
+########################################### Final Dataset Construction ###########################################
+
+if final_dataset_construction:
+    file_list = []
+    for file in os.listdir(final_dataset_path):
+        file_path = os.path.join(final_dataset_path, file)
+        file_list.append(pd.read_csv(file_path))
+    
+    final_dataset = pd.concat(file_list, ignore_index=True)
+    final_dataset = final_dataset[(final_dataset["Data Availability"] == True) & (final_dataset["Beat Miss Flag"] == 1)]
+    final_dataset = final_dataset.reset_index(drop=True)
+
+    for idx, row in final_dataset.iterrows():
+        equity_name = row["Equity name"]
+        ann_date = row["Ann Date"]
+        prev_ann_date = row["Prev Ann Date"]
+        next_ann_date = row["Next Ann Date"]
+        full_price_seq = row["total price seq"]
+        idx = full_price_seq.index[full_price_seq["Date"] == ann_date][0]
+
+        price_seq_prev = full_price_seq["Price"][idx+1-price_prev_window:idx+1]
+        price_seq_after = full_price_seq["Price"][idx:]
+
+        situation_flag, situation_details = situatuion_judgement(price_seq_after, price_after_window)
+        final_dataset.iloc[idx, "situation flag"] = situation_flag
+        final_dataset.iloc[idx, "situation details"] = situation_details
+        
+
+
+
+
+            
+            
+            
+
             
     
     
