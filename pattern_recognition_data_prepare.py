@@ -12,8 +12,8 @@ shutup.please()
 # parameters
 surprise_beat_threshold = 0.1
 influence_period = 20 # trading days
-lower_date_boundry = "2015-01-01" 
-upper_date_boundry = "2024-10-01"
+lower_date_boundry = "2020-01-01" 
+upper_date_boundry = "2025-05-01"
 output_ols_report = True
 num_total_quarter = 8
 price_prev_window = 20
@@ -25,7 +25,7 @@ num_of_parts = 3
 
 PE_check_flag = False
 Raw_data_process = True
-bbg_data_collect = True
+bbg_data_collect = False
 
 
 
@@ -59,6 +59,7 @@ if Raw_data_process:
         data["Equity name"] = equity_name
         data["Ann Date"] = pd.to_datetime(data["Ann Date"], errors='coerce')
         data["Prev Ann Date"] = data["Ann Date"].shift(-1)
+        data["Next Ann Date"] = data["Ann Date"].shift(1)
 
         data["EPS"] = data["Comp"]
         try:
@@ -94,12 +95,16 @@ if Raw_data_process:
 
         data["Quarter"] = data["Per End"].apply(month_to_quarter)
 
-        columns.extend(["Equity name", "Ann Date", "Prev Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag", "Sector", "Quarter"])
+        columns.extend(["Equity name", "Ann Date", "Prev Ann Date", "Next Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag", "Sector", "Quarter"])
         for i in range(num_total_quarter):
             col = f"Surprise {8-i}"
             data[col] = data["Ann Date"].shift(8-i)
             columns.append(col)
         
+        start_date_index = (data["Ann Date"] - pd.to_datetime(lower_date_boundry)).abs().idxmin()
+        end_date_index = (data["Ann Date"] - pd.to_datetime(upper_date_boundry)).abs().idxmin()
+        data = data.iloc[end_date_index:start_date_index,:]
+
         equity_df = data[columns]
         equity_df.dropna(how="any", inplace=True)
         if not equity_df.empty:
@@ -107,6 +112,7 @@ if Raw_data_process:
 
     total_equity_df = pd.concat(total_equity_df_list).reset_index(drop=True)
     total_equity_df = total_equity_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    print(f"number of total data is {len(total_equity_df)}")
     parts = np.array_split(total_equity_df, num_of_parts)
     for i, part in enumerate(parts):
         part.to_csv(f"{total_equity_df_prefix}_part_{i}.csv", index=False)
@@ -120,7 +126,7 @@ if bbg_data_collect:
     for file in os.listdir(bbg_data_collect_path):
         total_equity_df= pd.read_csv(file)
         for idx, row in total_equity_df.iterrows():
-            full_price_seq = get_stock_price_data_boolmberg_start_end_period(row["Equity name"], row["prev"])
+            full_price_seq = get_stock_price_data_boolmberg_start_end_period(row["Equity name"], row["Prev Ann Date"], row["Next Ann Date"])
             
     
     

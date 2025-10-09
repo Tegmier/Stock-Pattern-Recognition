@@ -71,10 +71,10 @@ def get_one_day_indicator_data(ticker, current_date):
 
 
 
-# test
-ticker = "NVDA US Equity"
-start_date = datetime.date(2025,10,1)
-end_date = datetime.date(2025,11,31)
-# earnings_date = datetime.date(2025,8,27)
-print(get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date))
-# print(get_one_day_indicator_data(ticker, earnings_date))
+# # test
+# ticker = "NVDA US Equity"
+# start_date = datetime.date(2025,10,1)
+# end_date = datetime.date(2025,11,30)
+# # earnings_date = datetime.date(2025,8,27)
+# print(get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date))
+# # print(get_one_day_indicator_data(ticker, earnings_date))
