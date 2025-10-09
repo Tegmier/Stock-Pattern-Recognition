@@ -50,3 +50,24 @@ def calculate_stock_return(stock_data):
     """
     day0 = stock_data[0] 
     return (stock_data-day0)/day0
+
+def month_to_quarter(code) -> int:
+    # 先转成字符串
+    code = str(code)
+    if code == "nan" or code.strip() == "":
+        return None   # NaN 或空值
+    try:
+        month = int(code.split("/")[0])  # 取 MM 部分
+    except ValueError:
+        return None   # 转换失败返回 None
+    
+    if 1 <= month <= 3:
+        return 0
+    elif 4 <= month <= 6:
+        return 1
+    elif 7 <= month <= 9:
+        return 2
+    elif 10 <= month <= 12:
+        return 3
+    else:
+        return None

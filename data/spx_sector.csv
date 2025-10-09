@@ -1,0 +1,504 @@
+Ticker,Industry,Sector-Code
+A US Equity,"Consumer, Non-cyclical",3
+AAPL US Equity,Technology,7
+ABBV US Equity,"Consumer, Non-cyclical",3
+ABNB US Equity,Communications,1
+ABT US Equity,"Consumer, Non-cyclical",3
+ACGL US Equity,Financial,5
+ACN US Equity,Technology,7
+ADBE US Equity,Technology,7
+ADI US Equity,Technology,7
+ADM US Equity,"Consumer, Non-cyclical",3
+ADP US Equity,"Consumer, Non-cyclical",3
+ADSK US Equity,Technology,7
+AEE US Equity,Utilities,8
+AEP US Equity,Utilities,8
+AES US Equity,Utilities,8
+AFL US Equity,Financial,5
+AIG US Equity,Financial,5
+AIZ US Equity,Financial,5
+AJG US Equity,Financial,5
+AKAM US Equity,Technology,7
+ALB US Equity,Basic Materials,0
+ALGN US Equity,"Consumer, Non-cyclical",3
+ALL US Equity,Financial,5
+ALLE US Equity,Industrial,6
+AMAT US Equity,Technology,7
+AMCR US Equity,Industrial,6
+AMD US Equity,Technology,7
+AME US Equity,Industrial,6
+AMGN US Equity,"Consumer, Non-cyclical",3
+AMP US Equity,Financial,5
+AMT US Equity,Financial,5
+AMZN US Equity,Communications,1
+ANET US Equity,Communications,1
+ANSS US Equity,Technology,7
+AON US Equity,Financial,5
+AOS US Equity,Industrial,6
+APA US Equity,Energy,4
+APD US Equity,Basic Materials,0
+APH US Equity,Industrial,6
+APO US Equity,Financial,5
+APTV US Equity,"Consumer, Cyclical",2
+ARE US Equity,Financial,5
+ATO US Equity,Utilities,8
+AVB US Equity,Financial,5
+AVGO US Equity,Technology,7
+AVY US Equity,"Consumer, Non-cyclical",3
+AWK US Equity,Utilities,8
+AXON US Equity,Industrial,6
+AXP US Equity,Financial,5
+AZO US Equity,"Consumer, Cyclical",2
+BA US Equity,Industrial,6
+BAC US Equity,Financial,5
+BALL US Equity,Industrial,6
+BAX US Equity,"Consumer, Non-cyclical",3
+BBY US Equity,"Consumer, Cyclical",2
+BDX US Equity,"Consumer, Non-cyclical",3
+BEN US Equity,Financial,5
+BFB US Equity,"Consumer, Non-cyclical",3
+BG US Equity,"Consumer, Non-cyclical",3
+BIIB US Equity,"Consumer, Non-cyclical",3
+BK US Equity,Financial,5
+BKNG US Equity,Communications,1
+BKR US Equity,Energy,4
+BLDR US Equity,Industrial,6
+BLK US Equity,Financial,5
+BMY US Equity,"Consumer, Non-cyclical",3
+BR US Equity,Technology,7
+BRK/B US Equity,Financial,5
+BRO US Equity,Financial,5
+BSX US Equity,"Consumer, Non-cyclical",3
+BX US Equity,Financial,5
+BXP US Equity,Financial,5
+C US Equity,Financial,5
+CAG US Equity,"Consumer, Non-cyclical",3
+CAH US Equity,"Consumer, Non-cyclical",3
+CARR US Equity,Industrial,6
+CAT US Equity,Industrial,6
+CB US Equity,Financial,5
+CBOE US Equity,Financial,5
+CBRE US Equity,Financial,5
+CCI US Equity,Financial,5
+CCL US Equity,"Consumer, Cyclical",2
+CDNS US Equity,Technology,7
+CDW US Equity,Communications,1
+CEG US Equity,Utilities,8
+CF US Equity,Basic Materials,0
+CFG US Equity,Financial,5
+CHD US Equity,"Consumer, Non-cyclical",3
+CHRW US Equity,Industrial,6
+CHTR US Equity,Communications,1
+CI US Equity,"Consumer, Non-cyclical",3
+CINF US Equity,Financial,5
+CL US Equity,"Consumer, Non-cyclical",3
+CLX US Equity,"Consumer, Non-cyclical",3
+CMCSA US Equity,Communications,1
+CME US Equity,Financial,5
+CMG US Equity,"Consumer, Cyclical",2
+CMI US Equity,"Consumer, Cyclical",2
+CMS US Equity,Utilities,8
+CNC US Equity,"Consumer, Non-cyclical",3
+CNP US Equity,Utilities,8
+COF US Equity,Financial,5
+COO US Equity,"Consumer, Non-cyclical",3
+COP US Equity,Energy,4
+COR US Equity,"Consumer, Non-cyclical",3
+COST US Equity,"Consumer, Cyclical",2
+CPAY US Equity,"Consumer, Non-cyclical",3
+CPB US Equity,"Consumer, Non-cyclical",3
+CPRT US Equity,"Consumer, Cyclical",2
+CPT US Equity,Financial,5
+CRL US Equity,"Consumer, Non-cyclical",3
+CRM US Equity,Technology,7
+CRWD US Equity,Technology,7
+CSCO US Equity,Communications,1
+CSGP US Equity,Financial,5
+CSX US Equity,Industrial,6
+CTAS US Equity,"Consumer, Non-cyclical",3
+CTRA US Equity,Energy,4
+CTSH US Equity,Technology,7
+CTVA US Equity,"Consumer, Non-cyclical",3
+CVS US Equity,"Consumer, Non-cyclical",3
+CVX US Equity,Energy,4
+CZR US Equity,"Consumer, Cyclical",2
+D US Equity,Utilities,8
+DAL US Equity,"Consumer, Cyclical",2
+DASH US Equity,Communications,1
+DAY US Equity,Technology,7
+DD US Equity,Basic Materials,0
+DE US Equity,Industrial,6
+DECK US Equity,"Consumer, Cyclical",2
+DELL US Equity,Technology,7
+DFS US Equity,Financial,5
+DG US Equity,"Consumer, Cyclical",2
+DGX US Equity,"Consumer, Non-cyclical",3
+DHI US Equity,"Consumer, Cyclical",2
+DHR US Equity,"Consumer, Non-cyclical",3
+DIS US Equity,Communications,1
+DLR US Equity,Financial,5
+DLTR US Equity,"Consumer, Cyclical",2
+DOC US Equity,Financial,5
+DOV US Equity,Industrial,6
+DOW US Equity,Basic Materials,0
+DPZ US Equity,"Consumer, Cyclical",2
+DRI US Equity,"Consumer, Cyclical",2
+DTE US Equity,Utilities,8
+DUK US Equity,Utilities,8
+DVA US Equity,"Consumer, Non-cyclical",3
+DVN US Equity,Energy,4
+DXCM US Equity,"Consumer, Non-cyclical",3
+EA US Equity,Technology,7
+EBAY US Equity,Communications,1
+ECL US Equity,Basic Materials,0
+ED US Equity,Utilities,8
+EFX US Equity,"Consumer, Non-cyclical",3
+EG US Equity,Financial,5
+EIX US Equity,Utilities,8
+EL US Equity,"Consumer, Non-cyclical",3
+ELV US Equity,"Consumer, Non-cyclical",3
+EMN US Equity,Basic Materials,0
+EMR US Equity,Industrial,6
+ENPH US Equity,Energy,4
+EOG US Equity,Energy,4
+EPAM US Equity,Technology,7
+EQIX US Equity,Financial,5
+EQR US Equity,Financial,5
+EQT US Equity,Energy,4
+ERIE US Equity,Financial,5
+ES US Equity,Utilities,8
+ESS US Equity,Financial,5
+ETN US Equity,Industrial,6
+ETR US Equity,Utilities,8
+EVRG US Equity,Utilities,8
+EW US Equity,"Consumer, Non-cyclical",3
+EXC US Equity,Utilities,8
+EXE US Equity,Energy,4
+EXPD US Equity,Industrial,6
+EXPE US Equity,Communications,1
+EXR US Equity,Financial,5
+F US Equity,"Consumer, Cyclical",2
+FANG US Equity,Energy,4
+FAST US Equity,"Consumer, Cyclical",2
+FCX US Equity,Basic Materials,0
+FDS US Equity,Communications,1
+FDX US Equity,Industrial,6
+FE US Equity,Utilities,8
+FFIV US Equity,Communications,1
+FI US Equity,Technology,7
+FICO US Equity,Technology,7
+FIS US Equity,Technology,7
+FITB US Equity,Financial,5
+FOX US Equity,Communications,1
+FOXA US Equity,Communications,1
+FRT US Equity,Financial,5
+FSLR US Equity,Energy,4
+FTNT US Equity,Technology,7
+FTV US Equity,Industrial,6
+GD US Equity,Industrial,6
+GDDY US Equity,Communications,1
+GE US Equity,Industrial,6
+GEHC US Equity,"Consumer, Non-cyclical",3
+GEN US Equity,Communications,1
+GEV US Equity,Industrial,6
+GILD US Equity,"Consumer, Non-cyclical",3
+GIS US Equity,"Consumer, Non-cyclical",3
+GL US Equity,Financial,5
+GLW US Equity,Communications,1
+GM US Equity,"Consumer, Cyclical",2
+GNRC US Equity,Industrial,6
+GOOG US Equity,Communications,1
+GOOGL US Equity,Communications,1
+GPC US Equity,"Consumer, Cyclical",2
+GPN US Equity,"Consumer, Non-cyclical",3
+GRMN US Equity,Industrial,6
+GS US Equity,Financial,5
+GWW US Equity,"Consumer, Cyclical",2
+HAL US Equity,Energy,4
+HAS US Equity,"Consumer, Cyclical",2
+HBAN US Equity,Financial,5
+HCA US Equity,"Consumer, Non-cyclical",3
+HD US Equity,"Consumer, Cyclical",2
+HES US Equity,Energy,4
+HIG US Equity,Financial,5
+HII US Equity,Industrial,6
+HLT US Equity,"Consumer, Cyclical",2
+HOLX US Equity,"Consumer, Non-cyclical",3
+HON US Equity,Industrial,6
+HPE US Equity,Technology,7
+HPQ US Equity,Technology,7
+HRL US Equity,"Consumer, Non-cyclical",3
+HSIC US Equity,"Consumer, Non-cyclical",3
+HST US Equity,Financial,5
+HSY US Equity,"Consumer, Non-cyclical",3
+HUBB US Equity,Industrial,6
+HUM US Equity,"Consumer, Non-cyclical",3
+HWM US Equity,Industrial,6
+IBM US Equity,Technology,7
+ICE US Equity,Financial,5
+IDXX US Equity,"Consumer, Non-cyclical",3
+IEX US Equity,Industrial,6
+IFF US Equity,Basic Materials,0
+INCY US Equity,"Consumer, Non-cyclical",3
+INTC US Equity,Technology,7
+INTU US Equity,Technology,7
+INVH US Equity,Financial,5
+IP US Equity,Basic Materials,0
+IPG US Equity,Communications,1
+IQV US Equity,"Consumer, Non-cyclical",3
+IR US Equity,Industrial,6
+IRM US Equity,Financial,5
+ISRG US Equity,"Consumer, Non-cyclical",3
+IT US Equity,Technology,7
+ITW US Equity,Industrial,6
+IVZ US Equity,Financial,5
+J US Equity,Industrial,6
+JBHT US Equity,Industrial,6
+JBL US Equity,Industrial,6
+JCI US Equity,Industrial,6
+JKHY US Equity,Technology,7
+JNJ US Equity,"Consumer, Non-cyclical",3
+JNPR US Equity,Communications,1
+JPM US Equity,Financial,5
+K US Equity,"Consumer, Non-cyclical",3
+KDP US Equity,"Consumer, Non-cyclical",3
+KEY US Equity,Financial,5
+KEYS US Equity,Industrial,6
+KHC US Equity,"Consumer, Non-cyclical",3
+KIM US Equity,Financial,5
+KKR US Equity,Financial,5
+KLAC US Equity,Technology,7
+KMB US Equity,"Consumer, Non-cyclical",3
+KMI US Equity,Energy,4
+KMX US Equity,"Consumer, Cyclical",2
+KO US Equity,"Consumer, Non-cyclical",3
+KR US Equity,"Consumer, Non-cyclical",3
+KVUE US Equity,"Consumer, Non-cyclical",3
+L US Equity,Financial,5
+LDOS US Equity,Technology,7
+LEN US Equity,"Consumer, Cyclical",2
+LH US Equity,"Consumer, Non-cyclical",3
+LHX US Equity,Industrial,6
+LII US Equity,Industrial,6
+LIN US Equity,Basic Materials,0
+LKQ US Equity,"Consumer, Cyclical",2
+LLY US Equity,"Consumer, Non-cyclical",3
+LMT US Equity,Industrial,6
+LNT US Equity,Utilities,8
+LOW US Equity,"Consumer, Cyclical",2
+LRCX US Equity,Technology,7
+LULU US Equity,"Consumer, Cyclical",2
+LUV US Equity,"Consumer, Cyclical",2
+LVS US Equity,"Consumer, Cyclical",2
+LW US Equity,"Consumer, Non-cyclical",3
+LYB US Equity,Basic Materials,0
+LYV US Equity,"Consumer, Cyclical",2
+MA US Equity,Financial,5
+MAA US Equity,Financial,5
+MAR US Equity,"Consumer, Cyclical",2
+MAS US Equity,Industrial,6
+MCD US Equity,"Consumer, Cyclical",2
+MCHP US Equity,Technology,7
+MCK US Equity,"Consumer, Non-cyclical",3
+MCO US Equity,"Consumer, Non-cyclical",3
+MDLZ US Equity,"Consumer, Non-cyclical",3
+MDT US Equity,"Consumer, Non-cyclical",3
+MET US Equity,Financial,5
+META US Equity,Communications,1
+MGM US Equity,"Consumer, Cyclical",2
+MHK US Equity,Industrial,6
+MKC US Equity,"Consumer, Non-cyclical",3
+MKTX US Equity,"Consumer, Non-cyclical",3
+MLM US Equity,Industrial,6
+MMC US Equity,Financial,5
+MMM US Equity,Industrial,6
+MNST US Equity,"Consumer, Non-cyclical",3
+MO US Equity,"Consumer, Non-cyclical",3
+MOH US Equity,"Consumer, Non-cyclical",3
+MOS US Equity,Basic Materials,0
+MPC US Equity,Energy,4
+MPWR US Equity,Technology,7
+MRK US Equity,"Consumer, Non-cyclical",3
+MRNA US Equity,"Consumer, Non-cyclical",3
+MS US Equity,Financial,5
+MSCI US Equity,Technology,7
+MSFT US Equity,Technology,7
+MSI US Equity,Communications,1
+MTB US Equity,Financial,5
+MTCH US Equity,Communications,1
+MTD US Equity,Industrial,6
+MU US Equity,Technology,7
+NCLH US Equity,"Consumer, Cyclical",2
+NDAQ US Equity,Financial,5
+NDSN US Equity,Industrial,6
+NEE US Equity,Utilities,8
+NEM US Equity,Basic Materials,0
+NFLX US Equity,Communications,1
+NI US Equity,Utilities,8
+NKE US Equity,"Consumer, Cyclical",2
+NOC US Equity,Industrial,6
+NOW US Equity,Technology,7
+NRG US Equity,Utilities,8
+NSC US Equity,Industrial,6
+NTAP US Equity,Technology,7
+NTRS US Equity,Financial,5
+NUE US Equity,Basic Materials,0
+NVDA US Equity,Technology,7
+NVR US Equity,"Consumer, Cyclical",2
+NWS US Equity,Communications,1
+NWSA US Equity,Communications,1
+NXPI US Equity,Technology,7
+O US Equity,Financial,5
+ODFL US Equity,Industrial,6
+OKE US Equity,Energy,4
+OMC US Equity,Communications,1
+ON US Equity,Technology,7
+ORCL US Equity,Technology,7
+ORLY US Equity,"Consumer, Cyclical",2
+OTIS US Equity,Industrial,6
+OXY US Equity,Energy,4
+PANW US Equity,Communications,1
+PARA US Equity,Communications,1
+PAYC US Equity,Technology,7
+PAYX US Equity,Technology,7
+PCAR US Equity,"Consumer, Cyclical",2
+PCG US Equity,Utilities,8
+PEG US Equity,Utilities,8
+PEP US Equity,"Consumer, Non-cyclical",3
+PFE US Equity,"Consumer, Non-cyclical",3
+PFG US Equity,Financial,5
+PG US Equity,"Consumer, Non-cyclical",3
+PGR US Equity,Financial,5
+PH US Equity,Industrial,6
+PHM US Equity,"Consumer, Cyclical",2
+PKG US Equity,Industrial,6
+PLD US Equity,Financial,5
+PLTR US Equity,Technology,7
+PM US Equity,"Consumer, Non-cyclical",3
+PNC US Equity,Financial,5
+PNR US Equity,Industrial,6
+PNW US Equity,Utilities,8
+PODD US Equity,"Consumer, Non-cyclical",3
+POOL US Equity,"Consumer, Cyclical",2
+PPG US Equity,Basic Materials,0
+PPL US Equity,Utilities,8
+PRU US Equity,Financial,5
+PSA US Equity,Financial,5
+PSX US Equity,Energy,4
+PTC US Equity,Technology,7
+PWR US Equity,"Consumer, Non-cyclical",3
+PYPL US Equity,"Consumer, Non-cyclical",3
+QCOM US Equity,Technology,7
+RCL US Equity,"Consumer, Cyclical",2
+REG US Equity,Financial,5
+REGN US Equity,"Consumer, Non-cyclical",3
+RF US Equity,Financial,5
+RJF US Equity,Financial,5
+RL US Equity,"Consumer, Cyclical",2
+RMD US Equity,"Consumer, Non-cyclical",3
+ROK US Equity,Industrial,6
+ROL US Equity,"Consumer, Non-cyclical",3
+ROP US Equity,Technology,7
+ROST US Equity,"Consumer, Cyclical",2
+RSG US Equity,Industrial,6
+RTX US Equity,Industrial,6
+RVTY US Equity,"Consumer, Non-cyclical",3
+SBAC US Equity,Financial,5
+SBUX US Equity,"Consumer, Cyclical",2
+SCHW US Equity,Financial,5
+SHW US Equity,Basic Materials,0
+SJM US Equity,"Consumer, Non-cyclical",3
+SLB US Equity,Energy,4
+SMCI US Equity,Technology,7
+SNA US Equity,Industrial,6
+SNPS US Equity,Technology,7
+SO US Equity,Utilities,8
+SOLV US Equity,"Consumer, Non-cyclical",3
+SPG US Equity,Financial,5
+SPGI US Equity,"Consumer, Non-cyclical",3
+SRE US Equity,Utilities,8
+STE US Equity,"Consumer, Non-cyclical",3
+STLD US Equity,Basic Materials,0
+STT US Equity,Financial,5
+STX US Equity,Technology,7
+STZ US Equity,"Consumer, Non-cyclical",3
+SW US Equity,Industrial,6
+SWK US Equity,Industrial,6
+SWKS US Equity,Technology,7
+SYF US Equity,Financial,5
+SYK US Equity,"Consumer, Non-cyclical",3
+SYY US Equity,"Consumer, Non-cyclical",3
+T US Equity,Communications,1
+TAP US Equity,"Consumer, Non-cyclical",3
+TDG US Equity,Industrial,6
+TDY US Equity,Industrial,6
+TECH US Equity,"Consumer, Non-cyclical",3
+TEL US Equity,Industrial,6
+TER US Equity,Technology,7
+TFC US Equity,Financial,5
+TGT US Equity,"Consumer, Cyclical",2
+TJX US Equity,"Consumer, Cyclical",2
+TKO US Equity,"Consumer, Cyclical",2
+TMO US Equity,"Consumer, Non-cyclical",3
+TMUS US Equity,Communications,1
+TPL US Equity,Energy,4
+TPR US Equity,"Consumer, Cyclical",2
+TRGP US Equity,Energy,4
+TRMB US Equity,Industrial,6
+TROW US Equity,Financial,5
+TRV US Equity,Financial,5
+TSCO US Equity,"Consumer, Cyclical",2
+TSLA US Equity,"Consumer, Cyclical",2
+TSN US Equity,"Consumer, Non-cyclical",3
+TT US Equity,Industrial,6
+TTWO US Equity,Technology,7
+TXN US Equity,Technology,7
+TXT US Equity,Industrial,6
+TYL US Equity,Technology,7
+UAL US Equity,"Consumer, Cyclical",2
+UBER US Equity,Communications,1
+UDR US Equity,Financial,5
+UHS US Equity,"Consumer, Non-cyclical",3
+ULTA US Equity,"Consumer, Cyclical",2
+UNH US Equity,"Consumer, Non-cyclical",3
+UNP US Equity,Industrial,6
+UPS US Equity,Industrial,6
+URI US Equity,"Consumer, Non-cyclical",3
+USB US Equity,Financial,5
+V US Equity,Financial,5
+VICI US Equity,Financial,5
+VLO US Equity,Energy,4
+VLTO US Equity,Industrial,6
+VMC US Equity,Industrial,6
+VRSK US Equity,"Consumer, Non-cyclical",3
+VRSN US Equity,Communications,1
+VRTX US Equity,"Consumer, Non-cyclical",3
+VST US Equity,Utilities,8
+VTR US Equity,Financial,5
+VTRS US Equity,"Consumer, Non-cyclical",3
+VZ US Equity,Communications,1
+WAB US Equity,Industrial,6
+WAT US Equity,"Consumer, Non-cyclical",3
+WBA US Equity,"Consumer, Cyclical",2
+WBD US Equity,Communications,1
+WDAY US Equity,Technology,7
+WDC US Equity,Technology,7
+WEC US Equity,Utilities,8
+WELL US Equity,Financial,5
+WFC US Equity,Financial,5
+WM US Equity,Industrial,6
+WMB US Equity,Energy,4
+WMT US Equity,"Consumer, Cyclical",2
+WRB US Equity,Financial,5
+WSM US Equity,"Consumer, Cyclical",2
+WST US Equity,"Consumer, Non-cyclical",3
+WTW US Equity,Financial,5
+WY US Equity,Financial,5
+WYNN US Equity,"Consumer, Cyclical",2
+XEL US Equity,Utilities,8
+XOM US Equity,Energy,4
+XYL US Equity,Industrial,6
+YUM US Equity,"Consumer, Cyclical",2
+ZBH US Equity,"Consumer, Non-cyclical",3
+ZBRA US Equity,Technology,7
+ZTS US Equity,"Consumer, Non-cyclical",3

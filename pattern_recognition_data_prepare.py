@@ -2,10 +2,10 @@ import numpy as np
 import pandas as pd
 import os, sys
 from datetime import datetime
-from utils.data_preparation_toolkit import create_security_revenue_data_beat_analysis
-from utils.data_visualiztion_toolkit import beat_analysis_data_to_xlsx
 import matplotlib.pyplot as plt
 import shutup
+from tqdm import tqdm
+from utils.data_process_toolkit import month_to_quarter
 
 shutup.please()
 # parameters
@@ -18,8 +18,11 @@ output_ols_report = True
 PE_check_flag = False
 num_total_quarter = 8
 
-########################################### Run PE Check ###########################################
 path = "data/ern"
+sector_df_path = "data/spx_sector.csv"
+
+########################################### Run PE Check ###########################################
+
 if PE_check_flag:
     for file in os.listdir(path):
         df = pd.read_excel(os.path.join(path, file), engine="openpyxl")
@@ -31,7 +34,10 @@ if PE_check_flag:
             print(f"{file} check passed")
 
 ########################################### Raw Data Process ###########################################
-for equity in os.listdir(path):
+total_equity_df_list = []
+sector_df = pd.read_csv(sector_df_path)
+sector_dic = dict(zip(sector_df["Ticker"], sector_df["Sector-Code"]))
+for equity in tqdm(os.listdir(path), desc="Raw Data Processing"):  
     columns = []
     equity_name = equity[:-5]
     data = pd.read_excel(os.path.join(path, equity), 
@@ -40,14 +46,22 @@ for equity in os.listdir(path):
     data["Ann Date"] = pd.to_datetime(data["Ann Date"], errors='coerce')
 
     data["EPS"] = data["Comp"]
-    data["Surprise"] = data["%Surp"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
+    try:
+        data["Surprise"] = data["%Surp"].replace("N.M.", "0").str.rstrip("%").astype(float) / 100
+    except Exception:
+        print(f"{equity_name} encountered a problem while transforming Surprise")
+        sys.exit(1)
 
     for i in range(len(data)):
         pe = data.loc[i, "P/E"]
         if type(pe) is str:
             if 'k' in pe:
                 data.loc[i, "P/E"] = float(pe.strip("k")) * 1000
-                print(data.loc[i, "P/E"])
+            elif pe == '':
+                pass
+            else:
+                tqdm.write(f"{equity_name} has wrong value in PE")
+                sys.exit(1)
     data["PE"] = data["P/E"]
     data["PE Change"] = data["PE"].pct_change(periods=-1)
 
@@ -57,11 +71,32 @@ for equity in os.listdir(path):
     # Beat: 1, Miss: 0
     data["Beat Miss Flag"] = data["Surprise"].apply(lambda x: 1 if x>0 else 0)
 
-    columns.extend(["Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag"])
+    try:
+        data["Sector"] = sector_dic[equity_name]
+    except KeyError as e:
+        print(f"{equity_name} has no sector code")
+        sys.exit(1)
+
+    data["Quarter"] = data["Per End"].apply(month_to_quarter)
+
+    columns.extend(["Ann Date", "EPS", "Surprise", "PE", "PE Change", "Up Down Flag", "Beat Miss Flag", "Sector", "Quarter"])
     for i in range(num_total_quarter):
         col = f"Surprise {8-i}"
         data[col] = data["Ann Date"].shift(8-i)
         columns.append(col)
+    
+    equity_df = data[columns]
+    equity_df.dropna(how="any", inplace=True)
+    if not equity_df.empty:
+        total_equity_df_list.append(equity_df)
+
+total_equity_df = pd.concat(total_equity_df_list).reset_index(drop=True)
+total_equity_df.to_csv("data/total_equity_df.csv")
+
+
+
+    
+
 
     
     # data["Next Ann Date"] = data["Ann Date"].shift(1)
@@ -78,10 +113,6 @@ for equity in os.listdir(path):
     #         sys.exit(1)
     #     revenue_estimate["P/E"] = pe_series
     # security_revenue_data_list.append(revenue_estimate)
-
-
-        
-
 
 
 
