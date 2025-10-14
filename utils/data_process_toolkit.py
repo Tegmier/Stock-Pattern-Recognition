@@ -3,7 +3,6 @@ import pandas as pd
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
-import statsmodels.api as sm
 
 def calculate_excess_return(security, situation, security_info, avg_alpha_period):
     # return a list of alpha for each beat/miss for each equity
