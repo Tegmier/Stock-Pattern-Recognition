@@ -78,6 +78,26 @@ def get_marketcap(ticker, current_date):
     df.columns= ["Date", "Market Cap"]
     return df["Market Cap"][0]
 
+def get_price_marketcap(ticker, start_date, end_date):
+    df = blp.bdh(
+        [ticker],
+        ["PX_LAST", "CUR_MKT_CAP", "PE_RATIO", "PX_TO_BOOK_RATIO"],
+        start_date=start_date,
+        end_date=end_date)
+    df = df.reset_index()
+    df.columns= ["Date", "Price", "Market Cap", "PE Ratio", "PB Ratio"]
+    return df
+
+
+# test
+ticker = "NVDA US Equity"
+start_date = datetime.date(2015,10,1)
+end_date = datetime.date(2025,11,30)
+# earnings_date = datetime.date(2025,8,27)
+df = get_price_marketcap(ticker, start_date, end_date)
+df.to_csv("nvda_price_marketcap.csv", index=False)
+# print(get_one_day_indicator_data(ticker, earnings_date))
+
 
 
 
