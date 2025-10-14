@@ -89,3 +89,12 @@ def get_marketcap(ticker, current_date):
 # # earnings_date = datetime.date(2025,8,27)
 # print(get_stock_price_data_boolmberg_start_end(ticker, start_date, end_date))
 # # print(get_one_day_indicator_data(ticker, earnings_date))
+
+# # test
+# ticker = "ADP US Equity"
+# start_date = datetime.date(2021,4,28)
+# end_date = datetime.date(2021,10,27)
+# ann_date = datetime.date(2021,7,28)
+# # earnings_date = datetime.date(2025,8,27)
+# print(get_stock_price_data_boolmberg_start_end_period(ticker, start_date, end_date))
+# print(get_marketcap(ticker, start_date))

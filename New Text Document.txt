@@ -1,0 +1,7 @@
+BBG Data Collection Processing total_equity_df_3.csv:   2%|█▋                                                                                                           | 13/822 [00:02<02:19,  5.78it/sS 
+TLD US Equity, 2022-04-20 has no price sequence or market cap
+DLTR US Equity, 2021-03-16 has no price sequence or market cap
+BBG Data Collection Processing total_equity_df_3.csv:   2%|█▉                                                                                                           | 15/822 [00:02<02:17,  5.87it/s
+ADP US Equity, 2021-07-28 has no price sequence or market cap
+PWR US Equity, 2024-08-01 has no price sequence or market cap
+BBG Data Collection Processing total_equity_df_3.csv:  23%|█████████████████████████▏          

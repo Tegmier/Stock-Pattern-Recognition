@@ -11,7 +11,6 @@ from API.api import get_stock_price_data_boolmberg_start_end_period, get_marketc
 
 shutup.please()
 # parameters
-surprise_beat_threshold = 0.1
 influence_period = 20 # trading days
 lower_date_boundry = "2020-01-01" 
 upper_date_boundry = "2025-05-01"
@@ -20,12 +19,12 @@ num_total_quarter = 8
 price_prev_window = 20
 price_after_window = 20
 random_seed = 42
-num_of_parts = 3
+num_of_parts = 10
 
 
 
 PE_check_flag = False
-Raw_data_process = True
+Raw_data_process = False
 bbg_data_collect = False
 final_dataset_construction = True
 
@@ -118,17 +117,18 @@ if Raw_data_process:
     print(f"number of total data is {len(total_equity_df)}")
     parts = np.array_split(total_equity_df, num_of_parts)
     for i, part in enumerate(parts):
-        part.to_csv(f"{total_equity_df_prefix}_part_{i}.csv", index=False)
-
-
+        part.to_csv(f"{total_equity_df_prefix}_{i}.csv", index=False)
 
 ########################################### Price and other data collection from BBG ###########################################
 
 #### 把data/total_equity_df下的文件移动到bbg_data_collect中，然后进行处理
 if bbg_data_collect:
     for file in os.listdir(bbg_data_collect_path):
-        total_equity_df= pd.read_csv(os.path.join(bbg_data_collect, file))
-        for idx, row in total_equity_df.iterrows():
+        path = os.path.join(bbg_data_collect_path, file)
+        total_equity_df= pd.read_csv(path)
+        for idx, row in tqdm(total_equity_df.iterrows(), 
+                     total=total_equity_df.shape[0], 
+                     desc=f"BBG Data Collection Processing {file}"):
             equity_name = row["Equity name"]
             ann_date = row["Ann Date"]
             prev_ann_date = row["Prev Ann Date"]
@@ -136,20 +136,18 @@ if bbg_data_collect:
             try:
                 full_price_seq = get_stock_price_data_boolmberg_start_end_period(equity_name, prev_ann_date, next_ann_date)
                 market_cap = get_marketcap(equity_name, ann_date)
-                total_equity_df.iloc[idx, "Data Availability"] = True
-                total_equity_df.iloc[idx, "total price seq"] = full_price_seq
-                total_equity_df.iloc[idx, "market cap"] = market_cap
+                total_equity_df.loc[idx, "Data Availability"] = True
+                total_equity_df.loc[idx, "total price seq"] = full_price_seq
+                total_equity_df.loc[idx, "market cap"] = market_cap
             except Exception:
                 full_price_seq = pd.DataFrame()
                 market_cap = None
-                total_equity_df.iloc[idx, "Data Availability"] = False
-                total_equity_df.iloc[idx, "total price seq"] = full_price_seq
-                total_equity_df.iloc[idx, "market cap"] = market_cap
-                print(f"{row["Equity name"]}, {ann_date} has no price sequence or market cap")
+                total_equity_df.loc[idx, "Data Availability"] = False
+                total_equity_df.loc[idx, "total price seq"] = full_price_seq
+                total_equity_df.loc[idx, "market cap"] = market_cap
+                print(f"{equity_name}, {ann_date} has no price sequence or market cap")
         total_equity_df.to_csv(os.path.join(final_dataset_path, file)) 
                 
-
-
 ########################################### Final Dataset Construction ###########################################
 
 if final_dataset_construction:
@@ -161,6 +159,7 @@ if final_dataset_construction:
     final_dataset = pd.concat(file_list, ignore_index=True)
     final_dataset = final_dataset[(final_dataset["Data Availability"] == True) & (final_dataset["Beat Miss Flag"] == 1)]
     final_dataset = final_dataset.reset_index(drop=True)
+    print(f"number of final data is {len(final_dataset)}")
 
     for idx, row in final_dataset.iterrows():
         equity_name = row["Equity name"]
@@ -168,38 +167,17 @@ if final_dataset_construction:
         prev_ann_date = row["Prev Ann Date"]
         next_ann_date = row["Next Ann Date"]
         full_price_seq = row["total price seq"]
-        idx = full_price_seq.index[full_price_seq["Date"] == ann_date][0]
+        print(full_price_seq)
+        price_idx = full_price_seq.index[full_price_seq["Date"] == ann_date][0]
 
-        price_seq_prev = full_price_seq["Price"][idx+1-price_prev_window:idx+1]
-        price_seq_after = full_price_seq["Price"][idx:]
+        price_seq_prev = full_price_seq["Price"][price_idx+1-price_prev_window:price_idx+1]
+        price_seq_after = full_price_seq["Price"][price_idx:]
 
         situation_flag, situation_details = situatuion_judgement(price_seq_after, price_after_window)
-        final_dataset.iloc[idx, "situation flag"] = situation_flag
-        final_dataset.iloc[idx, "situation details"] = situation_details
-        
-
-
-
-
-            
-            
-            
-
-            
+        final_dataset.loc[idx, "situation flag"] = situation_flag
+        final_dataset.loc[idx, "situation details"] = situation_details
+    final_dataset.to_csv("data/final_dataset.csv", index=False)
     
-    
-    
-
-
-
-
-
-
-
-
-    
-
-
     
     # data["Next Ann Date"] = data["Ann Date"].shift(1)
     # start_date_index = (data["Ann Date"] - pd.to_datetime(lower_date_boundry)).abs().idxmin()
