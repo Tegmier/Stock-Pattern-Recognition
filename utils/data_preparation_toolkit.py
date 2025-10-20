@@ -38,6 +38,20 @@ def situatuion_judgement(stock_price_data, influence_period):
                            "full_time_peak_gain":full_time_peak_gain}
             else:
                 return 2, {}
-
-
-
+            
+def situatuion_judgement2(stock_price_data, end_date):
+    full_price_series = stock_price_data["Price"].to_numpy()
+    price_series = full_price_series[:end_date+1]
+    day_0_price = price_series[0]
+    day_1_price = price_series[1]
+    if day_1_price <= day_0_price:
+        # a beat down
+        return 3, {}
+    # Define situation 1: above day1 price on the final day
+    # Define situation 2: below day1 price on the final day
+    else:
+        # a beat up
+        if price_series[-1] >= day_1_price:
+            return 1, {}
+        else:
+            return 2, {}

@@ -3,6 +3,7 @@ import pandas as pd
 from xbbg import blp
 import datetime
 import numpy as np
+import os
 
 def get_stock_data_yf(ticker, start_date, trading_days):
     stock = yf.Ticker(ticker)
@@ -87,6 +88,26 @@ def get_price_marketcap(ticker, start_date, end_date):
     df = df.reset_index()
     df.columns= ["Date", "Price", "Market Cap", "PE Ratio"]
     return df
+
+def get_price_from_csv(ticker, start_date, end_date, csv_path):
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
+    file_path = os.path.join(csv_path, ticker + ".csv")
+    info_df = pd.read_csv(file_path, parse_dates=["Date"])
+    info_df = info_df[["Date", "Price"]]
+    start_index = abs(info_df["Date"] - start_date).idxmin()
+    end_index = abs(info_df["Date"] - end_date).idxmin()
+    return info_df.loc[start_index:end_index]
+
+def get_market_cap_from_csv(ticker, date, csv_path):
+    date = pd.to_datetime(date)
+    file_path = os.path.join(csv_path, ticker + ".csv")
+    info_df = pd.read_csv(file_path, parse_dates=["Date"])
+    idx = abs(info_df["Date"] - date).idxmin()
+    return info_df.loc[idx, "Market Cap"]
+
+
+
 
 
 # # test
